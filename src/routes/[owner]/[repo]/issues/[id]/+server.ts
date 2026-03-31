@@ -126,14 +126,8 @@ function issueToMarkdown(issue: GitHubIssue, comments: GitHubComment[]): string 
 	return lines.join('\n');
 }
 
-async function fetchGitHub(url: string, token?: string): Promise<Response> {
-	const headers: Record<string, string> = {
-		Accept: 'application/vnd.github+json',
-		'X-GitHub-Api-Version': '2022-11-28',
-		'User-Agent': 'github.yehiaabdelm.com'
-	};
-	if (token) headers['Authorization'] = `Bearer ${token}`;
-	return fetch(url, { headers });
+async function fetchGitHub(url: string): Promise<Response> {
+	return fetch(url);
 }
 
 export const GET: RequestHandler = async ({ params, platform }) => {
@@ -144,12 +138,11 @@ export const GET: RequestHandler = async ({ params, platform }) => {
 		return new Response('Invalid issue number', { status: 400 });
 	}
 
-	const token = platform?.env?.GITHUB_TOKEN;
 	const apiBase = `https://api.github.com/repos/${owner}/${repo}/issues/${id}`;
 
 	const [issueRes, commentsRes] = await Promise.all([
-		fetchGitHub(apiBase, token),
-		fetchGitHub(`${apiBase}/comments?per_page=100`, token)
+		fetchGitHub(apiBase),
+		fetchGitHub(`${apiBase}/comments?per_page=100`)
 	]);
 
 	if (!issueRes.ok) {

@@ -149,6 +149,7 @@ export const GET: RequestHandler = async ({ params, platform }) => {
 	]);
 
 	if (!issueRes.ok) {
+		console.log(`GitHub API error: ${issueRes.status} ${issueRes.statusText} for ${apiBase} (token: ${token ? 'set' : 'missing'})`);
 		const status = issueRes.status === 404 ? 404 : 502;
 		return new Response(
 			status === 404 ? `Issue ${owner}/${repo}#${id} not found` : 'GitHub API error',

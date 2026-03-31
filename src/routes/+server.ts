@@ -2,7 +2,7 @@ import type { RequestHandler } from '@sveltejs/kit';
 
 const markdown = `# github.yehiaabdelm.com
 
-Fetch any GitHub issue as markdown or JSON. Just replace \`github.com\` with \`github.yehiaabdelm.com\`.
+Fetch any GitHub issue as markdown. Just replace \`github.com\` with \`github.yehiaabdelm.com\`.
 
 ## Usage
 

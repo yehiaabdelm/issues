@@ -10,6 +10,4 @@
 	},
 	"workers_dev": true,
 	"preview_urls": true,
-	// Add your GitHub token as a secret:
-	// npx wrangler secret put GITHUB_TOKEN
 }
